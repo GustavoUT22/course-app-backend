@@ -5,6 +5,8 @@ require('dotenv').config();
 
 const conectarDB = require('./config/db');
 const usuarioRoutes = require('./routes/usuarioRoutes');
+const courseRoutes = require('./routes/courseRoutes');
+const enrollmentRoutes = require('./routes/enrollmentRoutes');
 
 const app = express();
 
@@ -16,8 +18,10 @@ async function iniciarServidor() {
   await conectarDB();
 
   app.use('/api', usuarioRoutes);
+  app.use('/api', courseRoutes);
+  app.use('/api', enrollmentRoutes);
 
-  const PORT = process.env.PORT || 27017;
+  const PORT = process.env.PORT || 3000;
 
   app.listen(PORT, () => {
     console.log(`Servidor ejecutandose en puerto ${PORT}`);
